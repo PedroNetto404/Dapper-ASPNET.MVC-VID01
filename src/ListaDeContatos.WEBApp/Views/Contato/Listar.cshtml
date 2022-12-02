@@ -1,0 +1,42 @@
+﻿@model ListaDeContatos.WEBApp.Models.Entidades.Pesssoa
+
+@{
+    ViewBag.Title = "Contatos";
+    Layout = "_Layout";
+}
+<div class="col-8">
+    <div class="row">
+
+
+        @if (Model.Contatos.Any())
+        {
+            <h2>Lista de contatos de @($"{Model.PrimeiroNome} {Model.UltimoNome}")</h2>
+            <table class="table table-hover">
+                <thead>
+                <th scope="col">#</th>
+                <th scope="col">TIPO CONTATO</th>
+                <th scope="col">CONTATO</th>
+                <th scope="col">AÇÕES</th>
+                </thead>
+                <tbody>
+                @foreach (var contato in Model.Contatos)
+                {
+                    <tr>
+                        <td>@contato.TipoContato</td>
+                        <td>@contato.ValorContato</td>
+                        <td>
+                            <a class="btn btn-primary" asp-controller="Contato" asp-action="Editar" asp-route-contatoId="@contato.Id">Editar</a>
+                            <a class="btn btn-danger" asp-controller="Contato" asp-action="Excluir" asp-route-contatoId="@contato.Id">Excluir</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+                
+            </table>
+        }
+        else
+        {
+            <h3>Nenhum contato encontrado</h3>
+        }
+    </div>
+</div>
